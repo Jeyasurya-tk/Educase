@@ -14,7 +14,7 @@
     "api",
     "haversine"
   ],
-  "author": "Antigravity",
+  "author": "Jeyasurya",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
