@@ -1,0 +1,289 @@
+{
+  "info": {
+    "_postman_id": "7f8b9e6a-12c3-4d5e-8f9a-2b3c4d5e6f7a",
+    "name": "School Management API",
+    "description": "Collection for testing the School Management API endpoints. Includes folders for adding schools and retrieving a sorted list of schools based on geographic proximity.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Add School",
+      "description": "Endpoints and examples for adding a new school to the database.",
+      "item": [
+        {
+          "name": "Add School Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ABC School\",\n  \"address\": \"Chennai, Tamil Nadu\",\n  \"latitude\": 13.0827,\n  \"longitude\": 80.2707\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/addSchool",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "addSchool"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"ABC School\",\n  \"address\": \"Chennai, Tamil Nadu\",\n  \"latitude\": 13.0827,\n  \"longitude\": 80.2707\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/addSchool",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "addSchool"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"School added successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Add School Error (Validation Failed)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"address\": \"\",\n  \"latitude\": 150.0000,\n  \"longitude\": -200.0000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/addSchool",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "addSchool"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example Error Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"address\": \"\",\n  \"latitude\": 150.0000,\n  \"longitude\": -200.0000\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/addSchool",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "addSchool"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Validation failed\",\n  \"errors\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Name must not be empty\"\n    },\n    {\n      \"field\": \"address\",\n      \"message\": \"Address must not be empty\"\n    },\n    {\n      \"field\": \"latitude\",\n      \"message\": \"Latitude must be a valid number between -90 and 90\"\n    },\n    {\n      \"field\": \"longitude\",\n      \"message\": \"Longitude must be a valid number between -180 and 180\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List Schools",
+      "description": "Endpoints and examples for listing and sorting schools by proximity.",
+      "item": [
+        {
+          "name": "List Schools Success",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listSchools?latitude=13.0827&longitude=80.2707",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "13.0827"
+                },
+                {
+                  "key": "longitude",
+                  "value": "80.2707"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/listSchools?latitude=13.0827&longitude=80.2707",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "listSchools"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "13.0827"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "80.2707"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"count\": 3,\n  \"schools\": [\n    {\n      \"id\": 1,\n      \"name\": \"ABC School\",\n      \"address\": \"Chennai, Tamil Nadu\",\n      \"latitude\": 13.0827,\n      \"longitude\": 80.2707,\n      \"distance\": 0\n    },\n    {\n      \"id\": 2,\n      \"name\": \"XYZ School\",\n      \"address\": \"Mumbai, Maharashtra\",\n      \"latitude\": 19.076,\n      \"longitude\": 72.8777,\n      \"distance\": 1033.1\n    },\n    {\n      \"id\": 3,\n      \"name\": \"PQR School\",\n      \"address\": \"Delhi, National Capital Territory\",\n      \"latitude\": 28.7041,\n      \"longitude\": 77.1025,\n      \"distance\": 1767.65\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "List Schools Error (Validation Failed)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listSchools?latitude=invalid&longitude=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "invalid"
+                },
+                {
+                  "key": "longitude",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example Error Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/listSchools?latitude=invalid&longitude=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "listSchools"
+                  ],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "invalid"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Validation failed\",\n  \"errors\": [\n    {\n      \"field\": \"latitude\",\n      \"message\": \"Latitude must be a valid number between -90 and 90\"\n    },\n    {\n      \"field\": \"longitude\",\n      \"message\": \"Longitude is required\"\n    },\n    {\n      \"field\": \"longitude\",\n      \"message\": \"Longitude must be a valid number between -180 and 180\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}
