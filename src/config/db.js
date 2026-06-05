@@ -12,14 +12,28 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Test connection on startup
+// Test connection and auto-initialize table on startup
 (async () => {
   try {
     const connection = await pool.getConnection();
     console.log('Database connection pool established successfully.');
+
+    // Auto-create table on startup if it doesn't exist
+    const createTableQuery = `
+      CREATE TABLE IF NOT EXISTS schools (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        address VARCHAR(500) NOT NULL,
+        latitude FLOAT NOT NULL,
+        longitude FLOAT NOT NULL
+      );
+    `;
+    await connection.query(createTableQuery);
+    console.log('Table "schools" successfully verified/initialized.');
+
     connection.release();
   } catch (error) {
-    console.error('Database connection failed:', error.message);
+    console.error('Database connection or initialization failed:', error.message);
   }
 })();
 
